@@ -41,10 +41,10 @@ ever. This folder is both the source and the site.
 - **Font**: TRIAL — Verdana for text, JetBrains Mono for code/ASCII (see
   the note atop `style.css`). Not yet blessed as final; STYLE.md still
   names JetBrains Mono as the face pending Shante's verdict.
-- **Placeholder content, delete when real posts land**: the three stub
-  posts (`agent-harnesses`, `entropy-is-not-disorder`, `backtests-lie` —
-  index entries + files), and eventually `gradient-descent` (kept for now
-  as the style specimen).
+- **No posts yet**: all placeholder posts (including the gradient-descent
+  specimen) were removed 2026-08-23; the index says "nothing here yet" and
+  carries a commented-out entry template. The post-page skeleton lives in
+  STYLE.md.
 - **Not yet pushed**: repo and remote are wired, but the first push is
   pending a one-time `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
   (the SSH key is passphrase-protected). After that: push, then choose

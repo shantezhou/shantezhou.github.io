@@ -55,11 +55,39 @@ lives in PUBLISHING.md.
 
 ## Writing a new post
 
-1. Copy `posts/gradient-descent.html` as `posts/<slug>.html`; keep the
-   `<head>` (font links, `../style.css`), the `nav → main > article → footer`
-   skeleton, and the `← index` links.
-2. Update `<title>` (`Post title · Shante Zhou`), `<meta name="description">`,
-   the `<h1>`, and the `<time datetime="YYYY-MM-DD">`.
+1. Create `posts/<slug>.html` from this skeleton (fill in title,
+   description, h1, and date):
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Post title · Shante Zhou</title>
+     <meta name="description" content="One honest sentence.">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="../style.css">
+   </head>
+   <body>
+     <nav class="site-nav"><a href="../index.html">← index</a></nav>
+     <main>
+     <article>
+       <header>
+         <h1>Post title</h1>
+         <p class="meta"><time datetime="YYYY-MM-DD">YYYY-MM-DD</time></p>
+       </header>
+
+       <!-- content -->
+
+     </article>
+     </main>
+     <footer><a href="../index.html">← index</a></footer>
+   </body>
+   </html>
+   ```
 3. Add one entry to the list in `index.html`, newest first. Entries follow
    the Lilian-Weng-minus-the-box format: bold title, 1–2 line summary, date
    — separated by 1px rules, no cards:
