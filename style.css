@@ -163,10 +163,6 @@ img {
 }
 .pic { margin: 1.5rem 0; }
 
-/* Contact info sits low on the page, after a long pause. */
-.contact-info { margin-top: 7rem; }
-.contact-info p { margin: 0.5rem 0; }
-
 p.math {
   text-align: center;
   margin: 2rem 0;

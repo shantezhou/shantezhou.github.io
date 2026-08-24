@@ -18,8 +18,8 @@ three standalone pages, unframed `pre.art`.)
 - `about.html` — About Me: the bio, then the Minecraft picture underneath.
 - `projects.html` — Projects: things built or being built, listed like the
   blog index (`projects/<slug>.html` or external links).
-- `contact.html` — "Don't be shy" under the heading, then a long pause, then
-  the email line and `discord: @unlikelihood` at the bottom.
+- `contact.html` — just the email line and `discord: @unlikelihood`, right
+  under the heading.
 - `posts/<slug>.html` — blog posts.
 - `img/` — the few pictures the site uses, web-compressed (≤1200px WebP).
 

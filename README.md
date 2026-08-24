@@ -31,8 +31,8 @@ ever. This folder is both the source and the site.
   picture underneath, unframed.
 - `projects.html` — says "loading..." for now; commented-out list template
   inside for the first real project.
-- `contact.html` — "dont be shy :)", long pause, then email +
-  `discord: @unlikelihood` at the bottom.
+- `contact.html` — email + `discord: @unlikelihood`, right under the
+  heading.
 - `posts/*.html` — one file per post. `img/` — compressed pictures (≤1200px
   WebP).
 
