@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shante Zhou</title>
+  <meta name="description" content="my notes about AI, chem, trading, and other whimsicals">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!--
+THESIS: A blog that is only its text — the entire interface is typography; refuses the card-grid blog index and every piece of chrome.
+OWN-WORLD: Pure #fff paper, pure #000 ink, nothing else; JetBrains Mono for every character; 1px rules are the only structure; hover and selection invert ink and paper.
+STORY: The reader lands on a name, one subject line, and a dated list; a click opens a post set like a beautifully kept terminal page; they read, they leave.
+FIRST VIEWPORT: Bold name top-left, tagline beneath, then the dated post list — no hero, no nav bar, no imagery.
+FORM: Brief-pinned direction (white/black, JetBrains Mono, ultra-minimal, HTML+CSS only); pinned brief beats the roll, no concept seed run.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance.
+-->
+  <header class="site-header">
+    <h1>Shante Zhou</h1>
+    <nav class="site-links">
+      <a href="about.html">about me</a> ·
+      <a href="projects.html">projects</a> ·
+      <a href="contact.html">contact me</a>
+    </nav>
+    <p class="tagline">my notes about AI, chem, trading, and other whimsicals</p>
+  </header>
+
+  <main>
+    <ul class="posts">
+      <li>
+        <a class="post-title" href="posts/gradient-descent.html">Gradient descent, in brief</a>
+        <p class="post-summary">
+          The one-line idea behind most of modern machine learning: follow
+          the negative gradient, and everything interesting hides in the
+          step size.
+        </p>
+        <time datetime="2026-08-22">2026-08-22</time>
+      </li>
+      <li>
+        <a class="post-title" href="posts/agent-harnesses.html">Building agent harnesses</a>
+        <p class="post-summary">
+          What actually breaks when you wire an LLM into a loop: tool
+          schemas, retries, and the scaffolding around the model mattering
+          more than the model.
+        </p>
+        <time datetime="2026-07-14">2026-07-14</time>
+      </li>
+      <li>
+        <a class="post-title" href="posts/entropy-is-not-disorder.html">Entropy is not disorder</a>
+        <p class="post-summary">
+          The messy-bedroom metaphor is doing thermodynamics dirty —
+          counting microstates is the honest picture, and it changes how
+          you read ΔS.
+        </p>
+        <time datetime="2026-06-02">2026-06-02</time>
+      </li>
+      <li>
+        <a class="post-title" href="posts/backtests-lie.html">Backtests lie</a>
+        <p class="post-summary">
+          Look-ahead bias, survivorship, and why the Sharpe ratio you
+          simulated collapses the day you trade real money.
+        </p>
+        <time datetime="2026-05-11">2026-05-11</time>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    <p class="copyright">© 2026 Shante Zhou</p>
+  </footer>
+</body>
+</html>

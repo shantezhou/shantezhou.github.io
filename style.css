@@ -1,0 +1,189 @@
+/* ————————————————————————————————————————————————
+   Shante Zhou — blog stylesheet
+   Two colors. 1px rules only.
+   FONT TRIAL: Verdana for text, JetBrains Mono for
+   code and ASCII art. Read STYLE.md before adding
+   anything here.
+   ———————————————————————————————————————————————— */
+
+:root {
+  --paper: #fff;
+  --ink: #000;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light; /* the white ground is the design; no auto-darkening */
+}
+
+body {
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 4rem;
+  max-width: 66ch;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.75;
+}
+
+/* The one interactive gesture of the site: ink and paper swap. */
+::selection { background: var(--ink); color: var(--paper); }
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+a:hover {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 0 0 2px var(--ink);
+  text-decoration: none;
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+a:focus-visible { text-decoration: none; }
+
+/* Type ————————————————————————————————— */
+
+h1, h2, h3 {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 2.75rem 0 1rem;
+}
+h1 { font-size: 1.125rem; margin-top: 0; }
+h3 { font-style: italic; }
+
+p { margin: 1rem 0; }
+
+sub, sup { font-size: 0.75em; line-height: 0; }
+
+mark { background: var(--ink); color: var(--paper); }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--ink);
+  margin: 2.5rem 0;
+}
+
+/* Site frame ——————————————————————————— */
+
+.site-header { margin-bottom: 3.5rem; }
+.site-header h1 { margin-bottom: 0.25rem; }
+.site-header .site-links { font-size: 0.875rem; }
+.site-header .tagline { margin: 1.25rem 0 0; }
+
+.site-nav { margin-bottom: 3.5rem; }
+
+footer {
+  margin-top: 4.5rem;
+  border-top: 1px solid var(--ink);
+  padding-top: 1rem;
+  font-size: 0.875rem;
+}
+footer .copyright { margin: 0; }
+
+/* Post index ——————————————————————————— */
+
+/* Lilian-Weng-style entries, minus the box: title, excerpt,
+   date — a 1px rule between entries instead of a card. */
+.posts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.posts li { padding: 1.75rem 0; }
+.posts li:first-child { padding-top: 0.5rem; }
+.posts li + li { border-top: 1px solid var(--ink); }
+.post-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.post-summary { margin: 0.6rem 0 0; }
+.posts time {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+}
+
+/* Article ——————————————————————————————— */
+
+article > header { margin-bottom: 2.5rem; }
+article > header .meta { margin-top: -0.75rem; }
+
+blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--ink);
+  font-style: italic;
+}
+
+ul, ol { padding-left: 2ch; }
+li { margin: 0.25rem 0; }
+
+code, kbd, samp {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: inherit;
+}
+
+pre {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ink);
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  scrollbar-color: var(--ink) var(--paper);
+  scrollbar-width: thin;
+}
+pre::-webkit-scrollbar { height: 8px; }
+pre::-webkit-scrollbar-thumb { background: var(--ink); }
+pre::-webkit-scrollbar-track { background: var(--paper); }
+
+/* Unframed ASCII art (small ornaments) —
+   code and charts keep the 1px frame; art doesn't. */
+pre.art {
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* For-funsies pictures: fluid, unframed. */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.pic { margin: 1.5rem 0; }
+
+/* Contact info sits low on the page, after a long pause. */
+.contact-info { margin-top: 7rem; }
+.contact-info p { margin: 0.5rem 0; }
+
+p.math {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+th, td {
+  text-align: left;
+  padding: 0.35rem 1.5rem 0.35rem 0;
+  vertical-align: top;
+}
+th { border-bottom: 1px solid var(--ink); }
+
+@media (prefers-reduced-motion: no-preference) {
+  a { transition: background-color 80ms linear, color 80ms linear, box-shadow 80ms linear; }
+}
