@@ -1,25 +1,31 @@
-# Blog style guide — v0.2
+# Blog style guide — v0.3
 
 The whole design in one sentence: **the blog is only its text** — pure white
 paper, pure black ink, JetBrains Mono for every character, 1px rules as the
 only structure, and one gesture (hover/selection inverts ink and paper).
 
-Status: v0.2. Adjust this file whenever the style changes; every new post
-must follow it. (v0.2: contact line under the name, bottom category line +
-three standalone pages, unframed `pre.art`.)
+Status: v0.3. Adjust this file whenever the style changes; every new post
+must follow it. (v0.3, 2026-10-25: category line `about me · projects ·
+writings`; projects get screenshots; papers live on `writings.html`;
+contact is unlinked for now. v0.2: contact line under the name, bottom
+category line + three standalone pages, unframed `pre.art`.)
 
 ## Site map
 
 - `index.html` — the blog, and the main thing. Header stack: name (h1),
-  category line `about me · projects · contact me` (small), tagline. Then
+  category line `about me · projects · writings` (small), tagline. Then
   the post list. Footer: just the © line. The category line is the site's
   only navigation besides `← index`; the email lives on the contact page
   only.
 - `about.html` — About Me: the bio, then the Minecraft picture underneath.
-- `projects.html` — Projects: things built or being built, listed like the
-  blog index (`projects/<slug>.html` or external links).
+- `projects.html` — Projects: things built or being built, each with its
+  title, a screenshot and a date line (see "Adding a project or a paper").
+- `writings.html` — Writings: papers, newest first. Kept apart from blog
+  posts, which stay on the home page.
 - `contact.html` — just the email line and `discord: @unlikelihood`, right
-  under the heading.
+  under the heading. Off the category line since 2026-10-25 ("delete the
+  contact me part for now"); the page still exists, so adding the link back
+  restores it.
 - `posts/<slug>.html` — blog posts.
 - `img/` — the few pictures the site uses, web-compressed (≤1200px WebP).
 
@@ -34,9 +40,10 @@ three standalone pages, unframed `pre.art`.)
    no rounded corners, no backgrounds.
 5. **No chrome.** No nav bar, cards, icons, buttons, or badges. Navigation
    is `← index` on subpages plus the header category line on the home page.
-   Small "for funsies" pictures are allowed where Shante asks (currently the
-   contact page): `<img class="pic">`, 1px ink frame, compressed into
-   `img/`. Posts stay image-free unless Shante says otherwise.
+   Pictures are allowed where Shante asks: the about page's picture
+   (`<img class="pic">`, unframed) and project screenshots (`.shot`, 1px ink
+   frame), compressed into `img/`. Posts stay image-free unless Shante says
+   otherwise.
 6. All shared styling lives in `style.css`. Posts carry **zero** inline
    styles and no `<style>` blocks.
 
@@ -88,9 +95,10 @@ lives in PUBLISHING.md.
    </body>
    </html>
    ```
-3. Add one entry to the list in `index.html`, newest first. Entries follow
-   the Lilian-Weng-minus-the-box format: bold title, 1–2 line summary, date
-   — separated by 1px rules, no cards:
+3. Add one entry to the list in `index.html`, newest first (for the first
+   post, uncomment the list first). Entries follow the
+   Lilian-Weng-minus-the-box format: bold title, 1–2 line summary, date —
+   separated by 1px rules, no cards:
 
    ```html
    <li>
@@ -99,6 +107,40 @@ lives in PUBLISHING.md.
      <time datetime="YYYY-MM-DD">YYYY-MM-DD</time>
    </li>
    ```
+
+## Adding a project or a paper
+
+No summaries for now: a bold title, then small `.post-meta` lines.
+
+- **Project** (`projects.html`, newest first) — the title links to the
+  thing itself: the live app if there is one, else the repo. Then a
+  screenshot, `img/<slug>.webp` at 1200px wide (from a light theme where
+  the app has one), linked to the same place. Then the date, plus `code`
+  when the title isn't the repo. Web apps (JavaScript allowed there) live
+  in their own repo and deploy elsewhere (Reactor Lab: a private repo on
+  Vercel, so no `code` link); this repo stays HTML + CSS.
+
+  ```html
+  <li>
+    <a class="post-title" href="https://pocketreactors.vercel.app/">Reactor Lab</a>
+    <a class="shot" href="https://pocketreactors.vercel.app/" tabindex="-1" aria-hidden="true"><img src="img/reactor-lab.webp" alt="" width="1200" height="638"></a>
+    <p class="post-meta"><time datetime="2026-10-23">2026-10-23</time></p>
+  </li>
+  ```
+
+  The screenshot link is hidden from screen readers and from Tab (the
+  title is the same link), which is why its `alt` is empty.
+- **Paper** (`writings.html`, newest first) — the title links to the
+  paper. One meta line for authors (my name in `<strong>`), venue or arXiv
+  id and year; a second for `pdf · code` links.
+
+  ```html
+  <li>
+    <a class="post-title" href="https://arxiv.org/abs/YYMM.NNNNN">Paper title</a>
+    <p class="post-meta"><strong>S. Zhou</strong>, A. Coauthor · arXiv YYMM.NNNNN · <time datetime="YYYY">YYYY</time></p>
+    <p class="post-meta"><a href="https://arxiv.org/pdf/YYMM.NNNNN">pdf</a> · <a href="https://github.com/shantezhou/repo">code</a></p>
+  </li>
+  ```
 
 ## Content elements
 
@@ -110,7 +152,7 @@ lives in PUBLISHING.md.
 - **ASCII diagrams** — a `<pre>` with `role="img"` and an `aria-label`
   describing what the picture shows. Keep every line ≤ 36 characters so the
   diagram fits a phone screen without scrolling. Charts/diagrams keep the
-  1px frame; decorative art (like the contact cat) uses `<pre class="art">`
+  1px frame; decorative art uses `<pre class="art">`
   — no frame, no padding.
 - **Asides** — `<blockquote>` (renders italic with a 1px left rule). Real
   quotes get a real attribution; unattributed blockquotes read as asides.

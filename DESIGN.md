@@ -95,7 +95,7 @@ The palette is binary: everything is either paper or ink, and any element may sw
 
 One centered column: `max-width: 66ch`, page padding `4.5rem 1.25rem 4rem`. There are no breakpoints — the measure is fluid and simply narrows on small screens (the only media query on the site is `prefers-reduced-motion`). Vertical rhythm is a rem ladder: 1rem paragraph flow, 1.5rem around block elements (code, blockquotes, tables), 2.5rem around `<hr>` and after article headers, 2.75rem above headings, 3.5rem below the site header/nav, 4.5rem of page-top and footer-top air.
 
-The post index is a two-column grid per row: a `10ch` column for the ISO date (`YYYY-MM-DD`), `1.5rem` gap, then the bold post-title link. Fixed-width content inside a post (`pre`, ASCII diagrams) scrolls horizontally inside a 1px-ruled box rather than breaking the measure; ASCII diagrams are authored ≤36 characters wide so phones never need to scroll them (see STYLE.md).
+The post, project and paper lists stack each entry: the bold title, an optional summary or screenshot, then a small date or meta line, with a 1px rule between entries. Fixed-width content inside a post (`pre`, ASCII diagrams) scrolls horizontally inside a 1px-ruled box rather than breaking the measure; ASCII diagrams are authored ≤36 characters wide so phones never need to scroll them (see STYLE.md).
 
 ## Elevation & Depth
 
@@ -121,7 +121,7 @@ The site has no buttons, cards, inputs, chips, or nav bars. Its component vocabu
 - **Focus:** 2px solid ink outline, offset 2px, underline removed.
 
 ### Post Index List
-- **Structure:** an unstyled `<ul class="posts">`; each row is a `10ch + 1fr` grid — ISO date in `<time>`, then the post link in bold (700). Rows are `0.4rem` apart, newest first. No cards, no excerpts, no tags.
+- **Structure:** an unstyled `<ul class="posts">`. Each entry stacks the title link in bold (700, 1.0625rem), an optional 1–2 line summary (posts) or screenshot in a 1px ink frame (projects), then a 14px line: the ISO date in `<time>`, or `.post-meta` (date and plain `code` / `pdf` links). Entries are `1.75rem` apart with a 1px rule between, newest first. No cards, no tags.
 
 ### Back-Link Navigation
 - **Style:** the literal text `← index`, a plain link, standing alone in `<nav class="site-nav">` at the top of a post and repeated in the footer. This is the entire navigation system.
@@ -149,7 +149,7 @@ The site has no buttons, cards, inputs, chips, or nav bars. Its component vocabu
 
 ### Don't:
 - **Don't** introduce a third color — no grays, no alpha, no syntax-highlight palettes, no dark mode (`color-scheme: light` is deliberate).
-- **Don't** add chrome: nav bars, cards, icons, images, logos, buttons, tags, or badges.
+- **Don't** add chrome: nav bars, cards, icons, images, logos, buttons, tags, or badges. (The pictures Shante asks for are not chrome: the about picture and project screenshots; see STYLE.md.)
 - **Don't** round a corner, thicken a rule past 1px, or use dashed/dotted/double borders.
 - **Don't** cast depth: no blurred, offset, or gray shadows — the solid `0 0 0 2px` ink hover halo is the only permitted `box-shadow`.
 - **Don't** add JavaScript, a build step, a framework, inline styles, or `<style>` blocks in posts; all styling lives in `style.css`.

@@ -112,6 +112,26 @@ footer .copyright { margin: 0; }
   font-size: 0.875rem;
 }
 
+/* Date and links under a project or paper title, on one line. */
+.post-meta {
+  margin: 0.6rem 0 0;
+  font-size: 0.875rem;
+}
+.posts .post-meta time {
+  display: inline;
+  margin: 0;
+  font-size: inherit;
+}
+
+/* Project screenshots: the column's full width in a 1px ink frame
+   (a light screenshot would otherwise melt into the paper). The link
+   around one keeps the site's hover, so the frame thickens to ink. */
+.shot {
+  display: block;
+  margin-top: 1rem;
+}
+.shot img { border: 1px solid var(--ink); }
+
 /* Article ——————————————————————————————— */
 
 article > header { margin-bottom: 2.5rem; }

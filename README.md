@@ -24,31 +24,32 @@ ever. This folder is both the source and the site.
 
 ## Site map
 
-- `index.html` — home: name, category line (about me · projects · contact
-  me), tagline, then the post list (Lilian-Weng-style entries: bold title,
-  1–2 line summary, date, 1px rule between — no boxes).
+- `index.html` — home: name, category line (about me · projects ·
+  writings), tagline, then the post list (Lilian-Weng-style entries: bold
+  title, 1–2 line summary, date, 1px rule between — no boxes).
 - `about.html` — bio (Shante's verbatim voice, lowercase), Minecraft
   picture underneath, unframed.
-- `projects.html` — says "loading..." for now; commented-out list template
-  inside for the first real project.
+- `projects.html` — projects, each a title, a screenshot (`img/`) and a
+  date line. Reactor Lab for now; Avalon Agents is commented out until it
+  has an interface to screenshot.
+- `writings.html` — papers. Says "loading..." for now; commented-out
+  entry template inside.
+- Reactor Lab is not in this repo: it lives in a private repo
+  (`shantezhou/PocketReactors`) and runs on Vercel at
+  https://pocketreactors.vercel.app.
 - `contact.html` — email + `discord: @unlikelihood`, right under the
-  heading.
+  heading. Unlinked from the category line for now (2026-10-25).
 - `posts/*.html` — one file per post. `img/` — compressed pictures (≤1200px
   WebP).
 
-## State as of 2026-08-23
+## State as of 2026-10-25
 
 - **Font**: TRIAL — Verdana for text, JetBrains Mono for code/ASCII (see
   the note atop `style.css`). Not yet blessed as final; STYLE.md still
   names JetBrains Mono as the face pending Shante's verdict.
-- **No posts yet**: all placeholder posts (including the gradient-descent
-  specimen) were removed 2026-08-23; the index says "nothing here yet" and
-  carries a commented-out entry template. The post-page skeleton lives in
-  STYLE.md.
-- **Not yet pushed**: repo and remote are wired, but the first push is
-  pending a one-time `ssh-add --apple-use-keychain ~/.ssh/id_ed25519`
-  (the SSH key is passphrase-protected). After that: push, then choose
-  repo visibility (private = site off while crafting, public = live).
+- **No posts or papers yet**: the index and `writings.html` carry
+  commented-out entry templates. The post-page skeleton lives in STYLE.md.
+- **Live**: the repo is public and Pages serves https://shantezhou.github.io.
 - **Next planned**: first real post via the Obsidian pipeline — Shante
   exports a note, it gets converted per PUBLISHING.md, reviewed, pushed.
 

@@ -24,7 +24,7 @@ Posts will contain technical elements: code blocks, inline code, mathematical no
 
 ## Capabilities and Constraints
 
-- Home page = list of posts; each links to a standalone post page.
+- Home page = list of posts; each links to a standalone post page. Projects (with screenshots) and writings (papers) have their own pages, linked from the category line (2026-10-25).
 - No CMS, no generator: publishing = hand-writing an HTML file from a template.
 - Once the style is settled, it gets encapsulated in a Markdown style-guide file (STYLE.md) so future posts stay consistent (user-requested workflow).
 - No real posts exist yet; the first post is a style specimen the user will review and adjust.

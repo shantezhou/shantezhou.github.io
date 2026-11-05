@@ -12,10 +12,10 @@ blog's HTML blocks. Update both when the process changes.
    meaning*: fixes typos, tightens headings, flags (never silently rewrites)
    anything that looks factually wrong or unverifiable.
 3. **Convert** — apply the mapping table below to produce
-   `posts/<slug>.html` from the post skeleton in STYLE.md (or
-   `notes/<slug>.html` for a research note).
-4. **List** — add the one-line entry to `index.html` (blog) or `notes.html`
-   (notes), newest first.
+   `posts/<slug>.html` from the post skeleton in STYLE.md.
+4. **List** — add the entry to the list in `index.html`, newest first (for
+   the first post, uncomment the list first). Papers are not posts: they
+   go on `writings.html` (STYLE.md, "Adding a project or a paper").
 5. **Review** — Shante reads the rendered page; adjustments loop until it's
    right. Anything the conversion had to decide unilaterally is called out.
 
