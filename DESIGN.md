@@ -138,7 +138,7 @@ rest.
 - 1440 wide, 2x: 72 | 612 | 72 | 612 | 72px. The about text runs about 43 characters a line at
   1440, 48 at 1512 and 54 at 1728.
 - The heading spans both pages; the words take the left page, the picture the right.
-- Each project stands on the page's centre line: the title, the date, then the screenshot, at every
+- Each project stands on the page's centre line: the title, its meta line, then the screenshot, at every
   width, under a heading that stays on the left like the others. Shante: "im wondering what it would
   look like for the image to be centered and then the title be above it, centered as well", and of
   the result: "the centered is fine for now we can optimize it later". The screenshot is at most
@@ -215,7 +215,7 @@ blocked. They have no canvas and no script.
   nothing (see Profile marks).
 - **Focus.** `a:focus-visible` gets a one-font-pixel white outline four font pixels out, one pixel
   clear of the underline; round a profile mark, four font pixels out from its box. Tab order on
-  index: Discord, LinkedIn, X, GitHub, about me, projects, writings, Reactor Lab (the screenshot
+  index: Discord, LinkedIn, X, GitHub, about me, projects, writings, Pocket Reactors (the screenshot
   links are skipped); contact.html has the same marks and section links after `← index`. Safari
   only tabs to links with Option-Tab unless "Press Tab to highlight each item" is on.
 - **Small links** (`.links`: the section links, `← index`, a paper's pdf · code). The dot between
@@ -293,8 +293,8 @@ blocked. They have no canvas and no script.
     ```
 - **Selection.** White background, black text, no moat.
 - **Section heading.** The section's lowercase name as an `<h2>`, then `--after-h2` of space.
-- **Project** (`article.project`). The title link (`h3`), a meta line (the date, then an optional
-  status after a dot), the screenshot link, all centred. Projects are `--between` apart.
+- **Project** (`article.project`). The title link (`h3`), a meta line (a date, a status, or both
+  with a dot between), the screenshot link, all centred. Projects are `--between` apart.
 - **Post and paper** (`article.entry`). At most one measure wide, with half of `--between` under
   each, never split across the two columns. A post: title, one or two lines, date. A paper: title,
   authors, arXiv id and year, pdf · code.

@@ -7,7 +7,7 @@ system behind them. Update both when the style changes.
 
 Projects go in `<section id="projects">` in `index.html`, newest first. The title links to the
 thing itself: the live app if there is one, else the repo. The screenshot links to the same place.
-This is the template. It sits in a comment below Reactor Lab, ready for Avalon Agents:
+This is the template. It sits in a comment below Pocket Reactors, ready for Avalon Agents:
 
 ```html
       <article class="project">
@@ -18,8 +18,9 @@ This is the template. It sits in a comment below Reactor Lab, ready for Avalon A
 ```
 
 - Keep the order h3, meta, screenshot: they stack on the page's centre line at every width.
-- A status, if Shante gives one, follows the date on the same line:
-  `<time datetime="2026-10-23">2026-10-23</time> · early beta`.
+- The line under the title holds whatever Shante gives: the date, a status after the date
+  (`<time datetime="2026-04-17">2026-04-17</time> · early beta`), or a status alone, as Pocket
+  Reactors has (`early beta`).
 - The screenshot link stays `aria-hidden="true" tabindex="-1"` with `alt=""`. The title is the same
   link, so screen readers and the keyboard meet it once.
 - To bring Avalon Agents back: add `img/avalon-agents.webp`, put its height in `height=""`, and
@@ -186,14 +187,13 @@ with `../`.
 
 ## Voice
 
-- The words on the site are Shante's, verbatim, including capitals and punctuation ("heya!", ":D",
-  "ai" in one place and "AI" in another). Don't rewrite, extend, polish or "fix" them without
-  asking.
+- The words on the site are Shante's, verbatim, including capitals and punctuation. Don't rewrite,
+  extend, polish or "fix" them without asking.
 - Never invent anything: facts, skills, projects, numbers, dates, quotes, testimonials or
   descriptions. If something is missing, ask Shante.
 - Shante writes in lowercase. Section names, links and page names stay lowercase (about me,
   projects, writings, contact, ← index). Keep whatever capitals Shante uses (AI, PG&E, UC Berkeley,
-  Reactor Lab).
+  Pocket Reactors).
 - Dates are ISO (`2026-10-23`), inside `<time datetime="...">`.
 - Posts are technical, first-person and plain: they teach something or record what Shante is
   learning. Claims must be true; toy examples are fine when labelled as such.

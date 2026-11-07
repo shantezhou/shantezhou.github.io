@@ -21,7 +21,7 @@ are; `_config.yml` keeps the docs off the site).
 | `fonts/macs-minecraft-regular.woff2` | the only font file |
 | `fonts/OFL.txt` | the font's licence; it ships with the font |
 | `img/minecraft-cherry-lake.webp` | the about me picture, 1200×676 |
-| `img/reactor-lab.webp` | the Reactor Lab screenshot, 1200×638 |
+| `img/reactor-lab.webp` | the Pocket Reactors screenshot, 1200×638 (from when the app was called Reactor Lab) |
 | `.gitignore` | ignores `.impeccable/` and `.DS_Store` |
 | `tools/marks.py` | draws the four profile marks' svgs from their bitmaps into both pages (STYLE.md, Change a profile link); not part of the site |
 | `_config.yml` | keeps the five docs and `tools/` out of GitHub Pages' Jekyll build, so they aren't published |
@@ -65,7 +65,7 @@ Read the relevant one before changing anything.
 Type: "mac's Minecraft" by macimas, under the SIL Open Font License 1.1 (`fonts/OFL.txt`). It is a
 fan-made recreation of Minecraft's font, not Mojang's.
 
-## State as of 2026-11-06
+## State as of 2026-11-07
 
 - New design: black sky, white pixel type. It replaces the old white-paper, JetBrains Mono,
   no-JavaScript design and its docs completely.
@@ -74,7 +74,7 @@ fan-made recreation of Minecraft's font, not Mojang's.
   `~/Desktop/Projects/shantezhou-site-options/`, with the other options that were tried.
 - Writings: no posts or papers yet; the section says "loading...". Post pages (`posts/`) are not
   designed yet (see PUBLISHING.md).
-- Projects: Reactor Lab, whose code lives in a private repo (`shantezhou/PocketReactors`) and which
+- Projects: Pocket Reactors, whose code lives in a private repo (`shantezhou/PocketReactors`) and which
   runs on Vercel at https://pocketreactors.vercel.app/. Avalon Agents is commented out until it has
   an interface to screenshot.
 - `contact.html` has been unlinked since 2026-10-25 ("delete the contact me part for now").
