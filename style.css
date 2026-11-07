@@ -1,205 +1,508 @@
-/* ————————————————————————————————————————————————
-   Shante Zhou — blog stylesheet
-   Two colors. 1px rules only.
-   FONT TRIAL: Verdana for text, JetBrains Mono for
-   code and ASCII art. Read STYLE.md before adding
-   anything here.
-   ———————————————————————————————————————————————— */
+/* Shante Zhou
+   White pixel type set into a turning night sky (bg.js draws it into #bg
+   and turns it). The font is drawn on an 8-pixel em, so every
+   font size is a multiple of 8px (20px only on 2x screens) and each pixel of
+   a letter lands on whole device pixels. Font sizes step at breakpoints and
+   are never fluid; only vertical spacing (--spread-top, and two short-window
+   steps) follows the window height. */
+
+@font-face {
+  font-family: "Macs Minecraft";
+  src: url("fonts/macs-minecraft-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
 
 :root {
-  --paper: #fff;
-  --ink: #000;
+  --white: #fff;            /* all the type: no greys, no drop shadow */
+
+  /* one pixel of the font, at whatever size it is used */
+  --px: 0.125em;
+  /* black on black, so invisible until a star drifts behind the
+     text: then it cuts a moat around every letter, and the sky shows only
+     clear of the words. --ring is two font pixels all round (one shadow at
+     each offset of a 5 x 5 square of them). --moat reaches three pixels to
+     the left and four to the right as well, which closes every gap inside a
+     line: a word space (five empty pixel columns), the space after a comma or
+     full stop (seven), and the notch at the top-left of an "a" */
+  --ring:
+    -.25em -.25em #000, -.125em -.25em #000, 0 -.25em #000, .125em -.25em #000, .25em -.25em #000,
+    -.25em -.125em #000, -.125em -.125em #000, 0 -.125em #000, .125em -.125em #000, .25em -.125em #000,
+    -.25em 0 #000, -.125em 0 #000, .125em 0 #000, .25em 0 #000,
+    -.25em .125em #000, -.125em .125em #000, 0 .125em #000, .125em .125em #000, .25em .125em #000,
+    -.25em .25em #000, -.125em .25em #000, 0 .25em #000, .125em .25em #000, .25em .25em #000;
+  --moat: var(--ring),
+    -.375em -.25em #000, -.375em -.125em #000, -.375em 0 #000, -.375em .125em #000, -.375em .25em #000,
+    .375em -.25em #000, .5em -.25em #000,
+    .375em -.125em #000, .5em -.125em #000,
+    .375em 0 #000, .5em 0 #000,
+    .375em .125em #000, .5em .125em #000,
+    .375em .25em #000, .5em .25em #000;
+
+  /* steps, phone first; the media queries at the end move them */
+  --m: 24px;                /* outer margin, and the gutter between pages */
+  --name: 56px;
+  --h2: 32px;
+  --h3: 24px;               /* project, post and paper titles */
+  --lead: 16px;             /* the lines under the name */
+  --body: 16px;
+  --meta: 16px;
+  --lh: 1.75;
+  --measure: 36em;          /* about 55 characters of this font */
+  --after-h2: 40px;
+  --spread-top: 96px;
+  --between: 64px;          /* between projects; half that between writings */
+  --sky-bottom: 48px;
+  /* the footer's height, so the last screen can make room for it */
+  --foot: calc(var(--body) * var(--lh) + max(var(--m), env(safe-area-inset-bottom)));
+
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 
 html {
+  background: #000;
+  color: var(--white);
+  font-family: "Macs Minecraft", ui-monospace, Menlo, monospace;
+  font-size: var(--body);
+  line-height: var(--lh);
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+  font-kerning: none;
   -webkit-text-size-adjust: 100%;
-  color-scheme: light; /* the white ground is the design; no auto-darkening */
+  text-size-adjust: 100%;
 }
 
 body {
-  margin: 0 auto;
-  padding: 4.5rem 1.25rem 4rem;
-  max-width: 66ch;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 0.9375rem; /* 15px */
-  line-height: 1.75;
+  margin: 0;
+  background: #000;
 }
 
-/* The one interactive gesture of the site: ink and paper swap. */
-::selection { background: var(--ink); color: var(--paper); }
+/* the sky: bg.js draws #bg and turns #sky-rot, which it builds round it, inside
+   #sky-clip, a window on the sky that holds still. Each .tw is one bright star,
+   on a small layer of its own so that it can shimmer. */
+#sky-clip {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  height: 100lvh;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+#sky-rot { position: absolute; will-change: transform; }
+#bg { position: absolute; left: 0; top: 0; }
+.tw { position: absolute; will-change: opacity; }
 
+.sky, body > main, footer {
+  position: relative;
+  z-index: 1;
+  padding-left: max(var(--m), env(safe-area-inset-left));
+  padding-right: max(var(--m), env(safe-area-inset-right));
+}
+
+h1, h2, h3, .name {
+  font-weight: 400;
+  line-height: 1.125;       /* the font's own 9-pixel line */
+  margin: 0;
+  text-shadow: var(--moat);
+}
+p { margin: 0; }
+/* the sky turns behind the words, so a star's glow under a block of text would
+   show as slices between its lines: the sky fades out behind the text */
+@media screen {
+  main h2, main h3, main p, main li, footer p {
+    width: fit-content;
+    background: #000;
+    box-shadow: 0 0 20px 10px #000;
+  }
+}
+img { display: block; max-width: 100%; height: auto; }
+
+/* a one-pixel underline three pixels under the baseline: clear of the
+   black moat that the descenders of g, j, p, q and y carry */
 a {
   color: inherit;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.25em;
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--px);
+  text-underline-offset: calc(3 * var(--px));
+  text-decoration-skip-ink: none;
 }
-a:hover {
-  background: var(--ink);
-  color: var(--paper);
-  box-shadow: 0 0 0 2px var(--ink);
-  text-decoration: none;
+@media (hover: hover) {
+  a:hover { text-decoration-thickness: calc(2 * var(--px)); }
+  /* its own rule: a browser without :has() drops only this one */
+  .project:has(.shot:hover) h3 a { text-decoration-thickness: calc(2 * var(--px)); }
 }
-:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
+/* a one-pixel frame four pixels out, one pixel clear of the underline */
+a:focus-visible {
+  outline: var(--px) solid var(--white);
+  outline-offset: calc(4 * var(--px));
 }
-a:focus-visible { text-decoration: none; }
+::selection { background: var(--white); color: #000; text-shadow: none; }
 
-/* Type ————————————————————————————————— */
+/* ---- the first screen: open sky, the name low on the left ------------------ */
 
-h1, h2, h3 {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin: 2.75rem 0 1rem;
+.sky {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: max(var(--m), env(safe-area-inset-top));
+  padding-bottom: max(var(--sky-bottom), env(safe-area-inset-bottom));
 }
-h1 { font-size: 1.125rem; margin-top: 0; }
-h3 { font-style: italic; }
-
-p { margin: 1rem 0; }
-
-sub, sup { font-size: 0.75em; line-height: 0; }
-
-mark { background: var(--ink); color: var(--paper); }
-
-hr {
-  border: 0;
-  border-top: 1px solid var(--ink);
-  margin: 2.5rem 0;
+/* the stars are far smaller than its strokes, so they pass behind the name
+   with no moat */
+.name {
+  font-size: var(--name);
+  text-shadow: none;
 }
-
-/* Site frame ——————————————————————————— */
-
-.site-header { margin-bottom: 3.5rem; }
-.site-header h1 { margin-bottom: 0.25rem; }
-.site-header .site-links { font-size: 0.875rem; }
-.site-header .tagline { margin: 1.25rem 0 0; }
-
-.site-nav { margin-bottom: 3.5rem; }
-
-footer {
-  margin-top: 4.5rem;
-  border-top: 1px solid var(--ink);
-  padding-top: 1rem;
-  font-size: 0.875rem;
+.lead {
+  font-size: var(--lead);
+  text-shadow: var(--moat);
+  text-wrap: balance;
 }
-footer .copyright { margin: 0; }
-
-/* Post index ——————————————————————————— */
-
-/* Lilian-Weng-style entries, minus the box: title, excerpt,
-   date — a 1px rule between entries instead of a card. */
-.posts {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+h1 + .lead { margin-top: 1.25em; }
+.lead + .links { margin-top: 1.75em; }
+/* the dots between links stand two pixels further off, clear of a focus frame */
+.links span { margin: 0 calc(2 * var(--px)); }
+/* a finger-sized target around each small link, without moving anything */
+.links a { position: relative; }
+.links a::after {
+  content: "";
+  position: absolute;
+  inset: -.75em -.25em;
 }
-.posts li { padding: 1.75rem 0; }
-.posts li:first-child { padding-top: 0.5rem; }
-.posts li + li { border-top: 1px solid var(--ink); }
-.post-title {
-  font-size: 1.0625rem;
-  font-weight: 700;
-  text-decoration: none;
+/* Shante's profiles under the name: Discord, LinkedIn, X and GitHub, each
+   brand's own mark drawn in pixels of the lead's font. Each is an inline SVG
+   whose viewBox counts font pixels: a box 16 of them tall (two lines of the
+   lead) and as wide as the drawing, with a gap of 16 between boxes. Its moat
+   is drawn in, black, under the white ink: the mark's silhouette and the
+   reach of --moat round it (three pixels to the left, four to the right, two
+   above and below), so the svg overhangs the box by that much; the negative
+   margins keep the box. The svg's width and height attributes (in ems) are
+   only the size it falls back to without this file. The row and its gaps
+   are as tall as the old tagline's line and gaps, so the name stays where it
+   was wherever that fitted one line. Hover changes nothing: there is no
+   underline to thicken. */
+.marks {
+  display: flex;
+  align-items: center;
+  gap: calc(16 * var(--px));
+  font-size: var(--lead);
 }
-.post-summary { margin: 0.6rem 0 0; }
-.posts time {
+.name + .marks { margin-top: 1.25em; }
+.marks + .links { margin-top: 1.5em; }
+.marks a {
+  position: relative;
   display: block;
-  margin-top: 0.6rem;
-  font-size: 0.875rem;
+}
+.marks svg {
+  display: block;
+  width: auto;
+  height: calc(20 * var(--px));
+  margin: calc(-2 * var(--px)) calc(-4 * var(--px)) calc(-2 * var(--px)) calc(-3 * var(--px));
+  fill: var(--white);
+  shape-rendering: crispEdges;
+  pointer-events: none;
+}
+.marks .moat { fill: #000; }
+/* a finger-sized target, 24 font pixels tall (48px on a phone), clear of the
+   next mark and of the section links */
+.marks a::after {
+  content: "";
+  position: absolute;
+  inset: calc(-4 * var(--px));
+}
+/* below 360px the section links wrap onto two lines: a taller line keeps each
+   link's target inside its own line */
+@media (max-width: 359px) {
+  .links { line-height: 2.75; }
 }
 
-/* Date and links under a project or paper title, on one line. */
-.post-meta {
-  margin: 0.6rem 0 0;
-  font-size: 0.875rem;
+/* ---- the name, typed out (index.html; Shante asked for it) ------------------
+   bg.js types the name, deletes it and types it again. At each step it sets
+   one attribute on the h1: data-typed="n" shows the first n characters with
+   Minecraft's chat caret after them, "n off" the same with the caret off (it
+   blinks while the line is idle). The caret is the font's own "_" where the
+   next character would start: there is one before the first character and one
+   after each, each giving its advance (6 font pixels) back, so none takes room;
+   only one shows. Hidden characters keep their room, so the wrap and
+   everything under the name stay put, and the letters never move. The rules
+   are screen-only and off under reduced motion: on paper and for anyone who
+   asks for less motion the name is simply there, as it is without scripts. */
+/* until bg.js takes over (it starts the line empty), the letters wait hidden,
+   for 2 s at most: then the name shows anyway, in case the script never runs */
+@media screen and (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .name:not([data-typed]) .letters > span { animation: name-wait 0s 2s backwards; }
 }
-.posts .post-meta time {
-  display: inline;
-  margin: 0;
-  font-size: inherit;
+@keyframes name-wait { from { visibility: hidden; } }
+@media screen and (prefers-reduced-motion: no-preference) {
+  /* letter-spacing takes the caret's whole advance back inside its own text,
+     so its box is 0 wide: the line breaks as before (a negative margin would
+     be counted too late in Chromium, and wrap "Zhou" early) and nothing
+     reaches past the window; the glyph itself is drawn as overflow */
+  .name[data-typed] .letters::before,
+  .name[data-typed] .letters > span::after {
+    content: "_";
+    letter-spacing: calc(-6 * var(--px));
+    visibility: hidden;
+  }
+  .name[data-typed~="0"] .letters > span,
+  .name[data-typed~="1"] .letters > :nth-child(n + 2),
+  .name[data-typed~="2"] .letters > :nth-child(n + 3),
+  .name[data-typed~="3"] .letters > :nth-child(n + 4),
+  .name[data-typed~="4"] .letters > :nth-child(n + 5),
+  .name[data-typed~="5"] .letters > :nth-child(n + 6),
+  .name[data-typed~="6"] .letters > :nth-child(n + 7),
+  .name[data-typed~="7"] .letters > :nth-child(n + 8),
+  .name[data-typed~="8"] .letters > :nth-child(n + 9),
+  .name[data-typed~="9"] .letters > :nth-child(n + 10),
+  .name[data-typed~="10"] .letters > :nth-child(n + 11) { visibility: hidden; }
+  .name[data-typed="0"] .letters::before,
+  .name[data-typed="1"] .letters > :nth-child(1)::after,
+  .name[data-typed="2"] .letters > :nth-child(2)::after,
+  .name[data-typed="3"] .letters > :nth-child(3)::after,
+  .name[data-typed="4"] .letters > :nth-child(4)::after,
+  .name[data-typed="5"] .letters > :nth-child(5)::after,
+  .name[data-typed="6"] .letters > :nth-child(6)::after,
+  .name[data-typed="7"] .letters > :nth-child(7)::after,
+  .name[data-typed="8"] .letters > :nth-child(8)::after,
+  .name[data-typed="9"] .letters > :nth-child(9)::after,
+  .name[data-typed="10"] .letters > :nth-child(10)::after,
+  .name[data-typed="11"] .letters > :nth-child(11)::after { visibility: visible; }
 }
 
-/* Project screenshots: the column's full width in a 1px ink frame
-   (a light screenshot would otherwise melt into the paper). The link
-   around one keeps the site's hover, so the frame thickens to ink. */
+/* contact.html: its own lines in the top-left corner, the name low on the
+   left as on the home page, the footer under them on the same screen */
+.contact {
+  min-height: calc(100vh - var(--foot));
+  min-height: calc(100svh - var(--foot));
+}
+.contact main { margin-bottom: auto; }
+.contact header { margin-top: calc(1.75 * var(--lead)); }
+.contact h1 { font-size: var(--h2); }
+
+/* ---- spreads: a screen each; words on the left page, pictures on the right */
+
+.spread {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: var(--spread-top);
+  padding-bottom: var(--spread-top);
+}
+/* the last screen ends with the footer, so its heading lands where the
+   others do when its link is followed */
+.spread:last-child {
+  min-height: calc(100vh - var(--foot));
+  min-height: calc(100svh - var(--foot));
+}
+.spread h2 {
+  font-size: var(--h2);
+  margin-bottom: var(--after-h2);
+}
+.words,
+.list {
+  text-shadow: var(--moat);
+  text-wrap: pretty;
+}
+.words { max-width: var(--measure); }
+.words p + p { margin-top: calc(var(--lh) * 1em); }
+
+.picture {
+  width: 100%;
+  margin-top: calc(var(--lh) * 1em);
+}
+
+/* a title's underline hangs up to five of its pixels under the baseline
+   (hovered); titles get the body's line pitch, so a title that wraps keeps
+   its underline clear of the line below */
+h3 {
+  font-size: var(--h3);
+  line-height: var(--lh);
+  margin-bottom: 0.5em;
+}
 .shot {
   display: block;
-  margin-top: 1rem;
+  margin-top: calc(var(--lh) * 1em);
 }
-.shot img { border: 1px solid var(--ink); }
-
-/* Article ——————————————————————————————— */
-
-article > header { margin-bottom: 2.5rem; }
-article > header .meta { margin-top: -0.75rem; }
-
-blockquote {
-  margin: 1.5rem 0;
-  padding-left: 1.25rem;
-  border-left: 1px solid var(--ink);
-  font-style: italic;
+/* a project's screenshot is an app window: its corners round by four font
+   pixels (8-12px). The about picture stays square. */
+.shot img { border-radius: calc(4 * var(--px)); }
+.meta {
+  font-size: var(--meta);
+  margin-top: 1em;
+  text-shadow: var(--moat);
 }
+h3 + .meta,
+.meta + .meta { margin-top: 0; }
+/* my name in a paper's author line: marked up, not styled (no bold here) */
+.meta strong { font-weight: 400; }
 
-ul, ol { padding-left: 2ch; }
-li { margin: 0.25rem 0; }
-
-code, kbd, samp {
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: inherit;
+/* when there are more of them */
+.project + .project { margin-top: var(--between); }
+/* a project stands on the page's centre line: the title, then the date, then the screenshot */
+@media screen {
+  .project { text-align: center; }
+  .project h3, .project .meta, .shot { margin-left: auto; margin-right: auto; }
 }
-
-pre {
-  margin: 1.5rem 0;
-  padding: 1rem 1.25rem;
-  border: 1px solid var(--ink);
-  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  overflow-x: auto;
-  font-size: 0.875rem;
-  line-height: 1.6;
-  scrollbar-color: var(--ink) var(--paper);
-  scrollbar-width: thin;
+/* on a short window the screenshot gives way, so that a whole project still fits one screen (1.88 is
+   its shape, 300px what stands above and below it). A browser without svh keeps the first line. */
+@media screen and (min-width: 720px) {
+  .shot { max-width: min(960px, 48em); }
+  .shot { max-width: min(960px, 48em, calc((100svh - var(--spread-top) - 300px) * 1.88)); }
 }
-pre::-webkit-scrollbar { height: 8px; }
-pre::-webkit-scrollbar-thumb { background: var(--ink); }
-pre::-webkit-scrollbar-track { background: var(--paper); }
-
-/* Unframed ASCII art (small ornaments) —
-   code and charts keep the 1px frame; art doesn't. */
-pre.art {
-  border: 0;
-  padding: 0;
-  font-size: inherit;
+.entry {
+  max-width: var(--measure);
+  padding-bottom: calc(var(--between) / 2);
+  break-inside: avoid;
 }
 
-/* For-funsies pictures: fluid, unframed. */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-.pic { margin: 1.5rem 0; }
-
-p.math {
-  text-align: center;
-  margin: 2rem 0;
+footer {
+  padding-bottom: max(var(--m), env(safe-area-inset-bottom));
+  text-shadow: var(--moat);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-}
-th, td {
-  text-align: left;
-  padding: 0.35rem 1.5rem 0.35rem 0;
-  vertical-align: top;
-}
-th { border-bottom: 1px solid var(--ink); }
+/* ---- steps ------------------------------------------------------------------ */
 
-@media (prefers-reduced-motion: no-preference) {
-  a { transition: background-color 80ms linear, color 80ms linear, box-shadow 80ms linear; }
+/* the longest single words ("contact", "projects") must fit a small phone */
+@media (min-width: 360px) {
+  :root {
+    --name: 64px;
+    --h2: 40px;
+  }
+}
+@media (min-width: 390px) {
+  :root { --name: 72px; }
+}
+@media (min-width: 720px) {
+  :root {
+    --m: 48px;
+    --name: 80px;
+    --h2: 48px;
+    --h3: 32px;
+    --lead: 24px;
+    --after-h2: 48px;
+    --spread-top: max(96px, 14vh);
+    --sky-bottom: var(--m);
+  }
+  .picture { max-width: var(--measure); }
+}
+@media (min-width: 1024px) {
+  :root { --name: 96px; }
+}
+@media (min-width: 1200px) {
+  :root {
+    --m: 72px;
+    --name: 120px;
+    --h2: 56px;
+    --after-h2: 64px;
+    --spread-top: max(120px, 16vh);
+    --between: 128px;
+  }
+  /* two pages: the left one reading measure wide, or half the spread when
+     that is narrower; the right one the rest */
+  .spread {
+    display: grid;
+    grid-template-columns: minmax(0, min(var(--measure), (100% - var(--m)) / 2)) minmax(0, 1fr);
+    column-gap: var(--m);
+    align-content: start;
+    align-items: start;
+  }
+  .spread h2,
+  .project,
+  .list { grid-column: 1 / -1; }
+  .words { grid-column: 1; }
+  .picture { grid-column: 2; grid-row: 2; }
+  .picture { max-width: min(960px, 48em); }   /* in step with the text beside it */
+  /* the top of a picture meets the top of the first letters beside it:
+     half the leading of that line (its box is 1.125em of glyphs) plus one
+     font pixel */
+  .picture { margin-top: calc((var(--lh) - 1.125) * 0.5em + var(--px)); }
+  /* writings: two balanced columns on the two pages, read down the left
+     one, then the right */
+  .list {
+    columns: 2;
+    column-gap: var(--m);
+    max-width: calc(2 * var(--measure) + var(--m));
+  }
+}
+@media (min-width: 1440px) {
+  :root { --name: 136px; }
+}
+@media (min-width: 1440px) and (min-resolution: 2dppx),
+       (min-width: 1440px) and (-webkit-min-device-pixel-ratio: 2) {
+  :root { --body: 20px; }
+}
+@media (min-width: 1680px) {
+  :root {
+    --m: 96px;
+    --name: 160px;
+    --h2: 64px;
+    --after-h2: 80px;
+  }
+}
+@media (min-width: 2200px) {
+  :root {
+    --m: 144px;
+    --name: 208px;
+    --h2: 80px;
+    --h3: 40px;
+    --lead: 32px;
+    --body: 24px;
+    --meta: 24px;
+    --after-h2: 96px;
+  }
+}
+
+/* a short wide window (a 13" MacBook's Safari is about 1440 x 790): less air
+   above each heading, so the about text ends clear of the bottom edge */
+@media (min-width: 1200px) and (max-height: 820px) {
+  :root {
+    --spread-top: 96px;
+    --after-h2: 48px;
+  }
+}
+
+/* contact.html in a window shorter than it needs (712, 730, 838, 863, 971 and
+   1326px tall from 720, 1024, 1200, 1440, 1680 and 2200px wide; a 13" MacBook's
+   Safari is about 1440 x 790): half the vertical margins, so it still fits one
+   screen. Re-measure these heights if contact.html's content changes. */
+@media (min-width: 720px) and (max-height: 711px),
+       (min-width: 1024px) and (max-height: 729px),
+       (min-width: 1200px) and (max-height: 837px),
+       (min-width: 1440px) and (max-height: 862px),
+       (min-width: 1680px) and (max-height: 970px),
+       (min-width: 2200px) and (max-height: 1325px) {
+  .contact {
+    --foot: calc(var(--body) * var(--lh) + max(var(--m) / 2, env(safe-area-inset-bottom)));
+    padding-top: max(var(--m) / 2, env(safe-area-inset-top));
+    padding-bottom: max(var(--sky-bottom) / 2, env(safe-area-inset-bottom));
+  }
+  .contact + footer { padding-bottom: max(var(--m) / 2, env(safe-area-inset-bottom)); }
+}
+
+/* paper: black type on white, no sky, no screen-tall sections */
+@media print {
+  :root {
+    --white: #000;
+    --ring: 0 0 transparent;
+    --moat: 0 0 transparent;
+    color-scheme: light;
+  }
+  html, body { background: #fff; }
+  #sky-clip, #bg { display: none; }
+  .marks .moat { fill: none; }
+  .sky, .spread, .spread:last-child, .contact { min-height: 0; }
+  .sky { padding-top: 0; padding-bottom: 0; }
+  .spread { padding-top: var(--m); padding-bottom: 0; }
+  .spread, .project { display: block; }
+  .picture, .shot { max-width: 60%; }
+  .project, .entry { break-inside: avoid; }
+  footer { padding-top: var(--m); padding-bottom: 0; }   /* no air under the last line: contact.html fits one sheet */
 }

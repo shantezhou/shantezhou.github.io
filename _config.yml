@@ -1,0 +1,10 @@
+# GitHub Pages builds this folder with Jekyll. The docs are for the repo, not the site:
+# without this, each would also be published as a page (DESIGN.html and so on).
+# tools/ holds the script that draws the profile marks; it isn't part of the site either.
+exclude:
+  - README.md
+  - STYLE.md
+  - DESIGN.md
+  - PRODUCT.md
+  - PUBLISHING.md
+  - tools
